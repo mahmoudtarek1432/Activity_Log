@@ -15,6 +15,20 @@
   margin: auto;
 }
 
+.details{
+  position: absolute;
+  width: 105%;
+  height: 100%;
+  top: 0;
+  left: -2.5%;
+  right: 0;
+  bottom: 0;
+}
+
+.segment-grid{
+  grid-template-columns: 1fr 3fr;
+}
+
 th:first-child{
   padding-left: 0.875rem;
 }
@@ -37,4 +51,9 @@ td:last-child{
 
 .gradient-profile{
   background: linear-gradient(138.62deg, #F3994A 14.17%, #B325E2 84.99%);
+}
+
+.gradient-profile-purple{
+  background: linear-gradient(138.62deg, #8947FE 14.17%, #B319FE 84.99%);
+
 }
