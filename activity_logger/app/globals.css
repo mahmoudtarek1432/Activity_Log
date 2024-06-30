@@ -71,3 +71,7 @@ td:last-child{
     scrollbar-width: 0;
     scrollbar-width: none;
 }
+
+.flex-split{
+  flex: 1 0;
+}

@@ -17,7 +17,8 @@ const config: Config = {
         "DarkGray": "#1c1c1c",
         "hoverGray": "#FBFBFB",
         "lightGray": "#DFDFDF",
-        "fontGray": "#929292"
+        "fontGray": "#929292",
+        "obsedian": "#575757"
       }
     },
 
