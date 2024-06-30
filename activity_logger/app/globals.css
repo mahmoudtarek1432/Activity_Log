@@ -4,9 +4,7 @@
 
 .container{
   width: 70vw;
-  height: 80vh;
-
-  position: absolute;
+ 
   top:0;
   bottom: 0;
   left: 0;
@@ -23,6 +21,13 @@
   left: -2.5%;
   right: 0;
   bottom: 0;
+}
+
+thead th{
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 .segment-grid{
@@ -56,4 +61,13 @@ td:last-child{
 .gradient-profile-purple{
   background: linear-gradient(138.62deg, #8947FE 14.17%, #B319FE 84.99%);
 
+}
+
+ .table__body {
+  padding: 0px 30px;
+    margin: 0px -31px;
+    overflow: visible;
+    overflow-y: scroll;
+    scrollbar-width: 0;
+    scrollbar-width: none;
 }
