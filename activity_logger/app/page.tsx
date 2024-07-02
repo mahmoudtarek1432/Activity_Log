@@ -1,7 +1,34 @@
 import { Span } from "next/dist/trace";
 import Image from "next/image";
 
+import LoggerTableRowData from "@/components/LoggerTableRowData";
+import LoggerTablerRowDataDetails from "@/components/LoggerTablerRowDataDetails";
+import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
+
 export default function Home() {
+  var list: LoggerInfoDetails[] = [
+    {
+      actionData: {name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2"},
+      actorData: {name: "Baraa Ahmed",address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030"},
+      date: "Aug 7, 5:38 PM"
+    },
+    {
+      actionData: {name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2"},
+      actorData: {name: "Baraa Ahmed",address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030"},
+      date: "Aug 7, 5:38 PM"
+    },
+    {
+      actionData: {name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2"},
+      actorData: {name: "Baraa Ahmed",address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030"},
+      date: "Aug 7, 5:38 PM"
+    },
+    {
+      actionData: {name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2"},
+      actorData: {name: "Baraa Ahmed",address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030"},
+      date: "Aug 7, 5:38 PM"
+    }
+  ]
+
   return (
     <>
     <div className="h-screen w-screen ">
@@ -11,17 +38,17 @@ export default function Home() {
             <input className=" bg-transparent h-full" type="text" placeholder="Search name, email or action..." />
             <span className="flex-split"></span>
             <div className="bar-splitter h-[100%] w-[1px] bg-lightGray"></div>
-            <div className="util flex flex-warp justify-center m-4">
+            <div className="util flex flex-warp justify-center items-center mx-4">
               <Image src="/filter.svg" width={13} height={13} alt="export" className="align-middle h-[13px]"></Image>
               <p className="uppercase align-middle font-normal text-xs mx-1 text-obsedian">Filter</p>
             </div>
             <div className="bar-splitter h-[100%] w-[1px] bg-lightGray"></div>
-            <div className="util flex flex-warp justify-center m-4">
+            <div className="util flex flex-warp justify-center items-center mx-4">
               <Image src="/export.svg" width={13} height={13} alt="export" className="align-middle h-[13px]"></Image>
               <p className="uppercase align-middle font-normal text-xs mx-1 text-obsedian">export</p>
             </div>
             <div className="bar-splitter h-[100%] w-[1px] bg-lightGray"></div>
-            <div className="util flex flex-warp justify-center m-4">
+            <div className="util flex flex-warp justify-center items-center mx-4">
               <Image src="/rec.svg" width={13} height={13} alt="export" className="align-middle h-[13px]"></Image>
               <p className="uppercase align-middle font-normal text-xs mx-1 text-obsedian">live</p>
             </div>
@@ -31,107 +58,23 @@ export default function Home() {
             <table className=" table-fixed w-full ">
             <thead className="bg-neutral-100">
               <tr className="">
-                <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">
-                  Actor</th>
+                <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">Actor</th>
                 <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">Action</th>
                 <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">Date</th>
                 <th className="w-6 bg-neutral-100"></th>
               </tr>
             </thead>
             <tbody className="text-sm text-DarkGray">
-              <tr className="hover:bg-hoverGray">
-                <td className="h-14"> 
-                  <span className=" icon inline-block h-6 w-6 gradient-profile text-xs font-bold align-middle leading-6 text-center rounded-full text-white">A</span>
-                  <span className="text inline-block pl-2  leading-6">ali@instatus.com</span>
-                </td>
-                <td className="h-14">user.searched_activity_log_events</td>
-                <td className="h-14">Aug 7, 5:38 PM</td>
-                <td><Image src="/right-arrow.png" width={13} height={13} alt="arrow"></Image></td>
-              </tr>
-              <tr className="hover:bg-hoverGray">
-                <td className="h-14">
-                  <span className=" icon inline-block h-6 w-6 gradient-profile text-xs font-bold align-middle leading-6 text-center rounded-full text-white">A</span>
-                  <span className="text inline-block pl-2  leading-6">ali@instatus.com</span>
-                </td>
-                <td className="h-14">user.searched_activity_log_events</td>
-                <td className="h-14">Aug 7, 5:38 PM</td>
-                <td ><Image src="/right-arrow.png" width={13} height={13} alt="arrow"></Image></td>
-              </tr>
-              <tr className="hover:bg-hoverGray">
-                <td className="h-14">
-                  <span className=" icon inline-block h-6 w-6 gradient-profile-purple text-xs font-bold align-middle leading-6 text-center rounded-full text-white">A</span>
-                  <span className="text inline-block pl-2 leading-6">ali@instatus.com</span>
-                </td>
-                <td className="h-14">user.searched_activity_log_events</td>
-                <td className="h-14">Aug 7, 5:38 PM</td>
-                <td><Image src="/right-arrow.png" width={13} height={13} alt="arrow"></Image></td>
-              </tr>
-              <tr>
-                <td colSpan={4} className="bg-gray-600 h-[300px] w-[100%] relative">
-                  <div className="details border bg-white border-lightGray rounded-xl shadow p-8 grid grid-cols-3 ">
-                    <div className="segment ">
-                      <div className="title uppercase text-fontGray font-medium">
-                        Actor
-                      </div>
-                      <div className="Attibute-grid grid segment-grid gap-y-2.5 mt-3.5">
-                        <div className="text-fontGray font-normal">Name</div>
-                        <div>Baraa Ahmed</div>
-                        <div className="text-fontGray font-normal">Email</div>
-                        <div>baraa@instatus.com</div>
-                        <div className="text-fontGray font-normal">ID</div>
-                        <div>user_DOKVD1U3L030</div>
-                      </div>
-                    </div>
-                    <div className="segment ">
-                      <div className="title uppercase text-fontGray font-medium">
-                        Action
-                      </div>
-                      <div className="Attibute-grid grid segment-grid gap-y-2.5 mt-3.5">
-                        <div className="text-fontGray font-normal">Name</div>
-                        <div>incident.create_succeeded</div>
-                        <div className="text-fontGray font-normal">Object</div>
-                        <div>event_action</div>
-                        <div className="text-fontGray font-normal">ID</div>
-                        <div>evt_action_PGTD81NCAOQ2</div>
-                      </div>
-                    </div>
-                    <div className="segment ">
-                      <div className="title uppercase text-fontGray font-medium">
-                        Date
-                      </div>
-                      <div className="Attibute-grid grid segment-grid gap-y-2.5 mt-3.5">
-                        <div className="text-fontGray font-normal">Readable</div>
-                        <div>Aug 7, 4:48 PM</div>
-                      </div>
-                    </div>
-                    <div className="segment ">
-                      <div className="title uppercase text-fontGray font-medium">
-                        MetaData
-                      </div>
-                      <div className="Attibute-grid grid segment-grid gap-y-2.5 mt-3.5">
-                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[250px]"></div>
-                      </div>
-                    </div>
-                    <div className="segment ">
-                      <div className="title uppercase text-fontGray font-medium">
-                        Target
-                      </div>
-                      <div className="Attibute-grid grid segment-grid gap-y-2.5 mt-3.5">
-                        <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[250px]"></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr className="hover:bg-hoverGray">
-                <td className="h-14">
-                  <span className=" icon inline-block h-6 w-6 gradient-profile-purple text-xs font-bold align-middle leading-6 text-center rounded-full text-white">A</span>
-                  <span className="text inline-block pl-2 leading-6">ali@instatus.com</span>
-                </td>
-                <td className="h-14">user.searched_activity_log_events</td>
-                <td className="h-14">Aug 7, 5:38 PM</td>
-                <td><Image src="/right-arrow.png" width={13} height={13} alt="arrow"></Image></td>
-              </tr>
+              {list.length > 0 && list.map(e =>
+                ( <LoggerTableRowData 
+                  actionData={e.actionData}
+                  actorData={e.actorData} 
+                  date={e.date}>
+                </LoggerTableRowData>
+                )
+               )}
+               
+            
               {/* skeleton*/ }
               <tr className="hover:bg-hoverGray animate-pulse">
                 <td className="h-14">
