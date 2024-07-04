@@ -12,7 +12,7 @@ export default function EventComponent() {
     const eventStore = useEventStore();
 
     useEffect(() => {
-        GetEvents(eventStore.page + 1, 1, "incident.create_succeeded", { action_id: null, actor_id: null, target_id: null, name: null }).
+        GetEvents(eventStore.page + 1, 1, null, { action_id: null, actor_id: null, target_id: null, name: null }).
             then(e => {
                 eventStore.updateList(e)
                 eventStore.incrementPage()
