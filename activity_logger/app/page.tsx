@@ -6,33 +6,13 @@ import LoggerTablerRowDataDetails from "@/app/components/LoggerTablerRowDataDeta
 import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
 import prisma from "@/lib/db";
 import mapEventIntoLoggerDetails from "@/Mapping/EventMap";
+import axios from "axios";
+import { Prisma } from "@prisma/client";
+import { GetEvents } from "@/Client/Actions/EventActions";
 
 export default async function Home() {
-  var events = await prisma.event.findMany({ include: { actor: true, action: true, target: true } });
-  var mappedList = events.map(e => mapEventIntoLoggerDetails(e.action, e, e.actor))
+  var logs = await GetEvents(1, 10, "baraa", { action_id: null, actor_id: null, target_id: null, name: null })
 
-  var list: LoggerInfoDetails[] = [
-    {
-      actionData: { name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2" },
-      actorData: { name: "Baraa Ahmed", address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030" },
-      date: "Aug 7, 5:38 PM"
-    },
-    {
-      actionData: { name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2" },
-      actorData: { name: "Baraa Ahmed", address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030" },
-      date: "Aug 7, 5:38 PM"
-    },
-    {
-      actionData: { name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2" },
-      actorData: { name: "Baraa Ahmed", address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030" },
-      date: "Aug 7, 5:38 PM"
-    },
-    {
-      actionData: { name: "incident.create_succeeded", object: "event_action", id: "evt_action_PGTD81NCAOQ2" },
-      actorData: { name: "Baraa Ahmed", address: "user.searched_activity_log_events", email: "baraa@instatus.com", id: "user_DOKVD1U3L030" },
-      date: "Aug 7, 5:38 PM"
-    }
-  ]
 
   return (
     <>
@@ -40,7 +20,7 @@ export default async function Home() {
         <div className="container w-full rounded-xl shadow">
           <div className="Search-Bar w-full bg-neutral-100 px-4 pt-4 rounded-t-xl">
             <div className="wrapper w-full border border-lightGray rounded-lg pl-4 h-11 flex">
-              <input className=" bg-transparent h-full" type="text" placeholder="Search name, email or action..." />
+              <input className="w-full bg-transparent h-full" type="text" placeholder="Search name, email or action..." />
               <span className="flex-split"></span>
               <div className="bar-splitter h-[100%] w-[1px] bg-lightGray"></div>
               <div className="util flex flex-warp justify-center items-center mx-4">
@@ -70,7 +50,7 @@ export default async function Home() {
                 </tr>
               </thead>
               <tbody className="text-sm text-DarkGray">
-                {mappedList.length > 0 && mappedList.map(e =>
+                {logs.length > 0 && logs.map(e =>
                 (<LoggerTableRowData
                   actionData={e.actionData}
                   actorData={e.actorData}
