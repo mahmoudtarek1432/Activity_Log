@@ -2,9 +2,10 @@ export interface LoggerInfoDetails {
     actorData: Actor,
     actionData: Action
     date: string
+    id: string
 }
 
-export interface Actor{
+export interface Actor {
     name: string,
     email: string,
     address: string,
