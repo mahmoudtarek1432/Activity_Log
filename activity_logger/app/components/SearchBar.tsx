@@ -33,14 +33,16 @@ export default function SearchBar() {
 
                 eventStore.setPage(1);
 
-                setPassedInterval(0)
-                setSearchDirty(false)
+                setPassedInterval(0);
+                setSearchDirty(false);
                 eventStore.refreshList([]);
+                eventStore.setIsLoading(true);
                 GetEvents(eventStore.page, pageSize, searchStore.searchKey, { action_id: null, actor_id: null, target_id: null, name: null }).
                     then(res => {
 
                         console.log(res)
                         eventStore.refreshList(res);
+                        eventStore.setIsLoading(false);
                         if (res.length >= pageSize)
                             eventStore.setHasMoreItems(true)
                         else

@@ -16,6 +16,7 @@ export default function EventComponent() {
         (data, key, config) => {
             eventStore.updateList(data)
             eventStore.incrementPage()
+            eventStore.setIsLoading(false)
         }
     )
 
@@ -40,7 +41,7 @@ export default function EventComponent() {
                                 </tr>
                             </thead>
                             <tbody className="text-sm text-DarkGray">
-                                {!dataFetch.isLoading ? dataFetch.data.map(e =>
+                                {eventStore.eventList.length > 0 && eventStore.eventList.map(e =>
                                 (
 
                                     <LoggerTableRowData key={e.id}
@@ -51,17 +52,19 @@ export default function EventComponent() {
                                         date={e.date} >
                                     </LoggerTableRowData>
                                 )
-                                ) : (
-                                    <>
-                                        <SkeletonRow></SkeletonRow>
-                                        <SkeletonRow></SkeletonRow>
-                                        <SkeletonRow></SkeletonRow>
-                                        <SkeletonRow></SkeletonRow>
-                                        <SkeletonRow></SkeletonRow>
-                                        <SkeletonRow></SkeletonRow>
-                                        <SkeletonRow></SkeletonRow>
-                                    </>
                                 )}
+                                {eventStore.isLoading &&
+                                    (
+                                        <>
+                                            <SkeletonRow></SkeletonRow>
+                                            <SkeletonRow></SkeletonRow>
+                                            <SkeletonRow></SkeletonRow>
+                                            <SkeletonRow></SkeletonRow>
+                                            <SkeletonRow></SkeletonRow>
+                                            <SkeletonRow></SkeletonRow>
+                                            <SkeletonRow></SkeletonRow>
+                                        </>
+                                    )}
 
 
 

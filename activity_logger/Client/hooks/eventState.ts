@@ -7,14 +7,16 @@ type action = {
   toggle(eventId: string): void
   incrementPage(): void
   setPage(index: number): void
-  setHasMoreItems(predicate: boolean): void
+  setHasMoreItems(predicate: boolean): void,
+  setIsLoading(value: boolean): void
 }
 
 type state = {
   eventList: LoggerInfoDetails[],
   page: number,
   toggledEventId: string,
-  hasMoreItems: boolean
+  hasMoreItems: boolean,
+  isLoading: boolean
 }
 
 const useEventStore = create<state & action>((set) => ({
@@ -22,6 +24,7 @@ const useEventStore = create<state & action>((set) => ({
   page: 0,
   toggledEventId: "",
   hasMoreItems: true,
+  isLoading: true,
   refreshList(events: LoggerInfoDetails[]) {
     set((state) => ({
       ...state,
@@ -61,7 +64,12 @@ const useEventStore = create<state & action>((set) => ({
       ...state,
       hasMoreItems: predicate
     }))
-
+  },
+  setIsLoading(value: boolean) {
+    set((state) => ({
+      ...state,
+      isLoading: value
+    }))
   }
 }))
 

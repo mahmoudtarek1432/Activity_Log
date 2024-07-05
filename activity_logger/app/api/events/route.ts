@@ -100,7 +100,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
         }
     });
-    query[0].createdOn
+
     console.log("query", JSON.stringify(query))
     var mapping = query.map(e => mapEventIntoLoggerDetails(e.action, e, e.actor, e.target, e.createdOn))
     console.log("map", mapping)

@@ -12,13 +12,14 @@ export default function LoadBar() {
             {eventStore.hasMoreItems &&
                 <div
                     onClick={() => {
-
+                        eventStore.setIsLoading(true);
                         GetEvents(eventStore.page + 1, pageSize, searchStore.searchKey, { action_id: null, actor_id: null, target_id: null, name: null }).
                             then(e => {
                                 eventStore.updateList(e)
                                 eventStore.incrementPage()
                                 if (e.length < pageSize)
                                     eventStore.setHasMoreItems(false)
+                                eventStore.setIsLoading(false);
                             })
 
                     }}
