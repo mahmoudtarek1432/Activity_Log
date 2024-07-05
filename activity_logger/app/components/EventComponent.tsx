@@ -5,21 +5,22 @@ import LoggerTableRowData from "./LoggerTableRowData";
 import SkeletonRow from "./SkeletonRow";
 import LoadBar from "./LoadBar";
 import { useEffect } from "react";
-import { GetEvents } from "@/Client/Actions/EventActions";
+import { GetEvents, GetEventsSWR } from "@/Client/Actions/EventActions";
 import { pageSize } from "../globals";
 import UtilBar from "./UtilBar";
 
 export default function EventComponent() {
 
     const eventStore = useEventStore();
+    var dataFetch = GetEventsSWR(eventStore.page + 1, pageSize, null, { action_id: null, actor_id: null, target_id: null, name: null },
+        (data, key, config) => {
+            eventStore.updateList(data)
+            eventStore.incrementPage()
+        }
+    )
 
     useEffect(() => {
-        GetEvents(eventStore.page + 1, pageSize, null, { action_id: null, actor_id: null, target_id: null, name: null }).
-            then(e => {
-                eventStore.updateList(e)
-                eventStore.incrementPage()
 
-            })
 
     }, [])
 
@@ -39,13 +40,14 @@ export default function EventComponent() {
                                 </tr>
                             </thead>
                             <tbody className="text-sm text-DarkGray">
-                                {eventStore.eventList.length > 0 ? eventStore.eventList.map(e =>
+                                {!dataFetch.isLoading ? dataFetch.data.map(e =>
                                 (
 
                                     <LoggerTableRowData key={e.id}
                                         id={e.id}
                                         actionData={e.actionData}
                                         actorData={e.actorData}
+                                        targetData={e.targetData}
                                         date={e.date} >
                                     </LoggerTableRowData>
                                 )

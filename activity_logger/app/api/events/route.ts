@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
 import { Event } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { json } from "stream/consumers";
 
 export async function GET(request: NextRequest, response: NextResponse) {
     var page = Number.parseInt(request.nextUrl.searchParams.get("page")!);
@@ -99,8 +100,33 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
         }
     });
-
-    var mapping = query.map(e => mapEventIntoLoggerDetails(e.action, e, e.actor))
+    query[0].createdOn
+    console.log("query", JSON.stringify(query))
+    var mapping = query.map(e => mapEventIntoLoggerDetails(e.action, e, e.actor, e.target, e.createdOn))
     console.log("map", mapping)
     return NextResponse.json(mapping)
+}
+
+export async function POST(request: NextRequest, response: NextResponse) {
+    try {
+        var requestBody = await request.json();
+        console.log([requestBody.id, requestBody.actionId, requestBody.actorId, requestBody.targetId])
+
+        var x = await prisma.event.create({
+            data: {
+                id: requestBody.id,
+                action: { connect: { id: requestBody.actionId } },
+                actor: { connect: { id: requestBody.actorId } },
+                target: { connect: { id: requestBody.targetId } },
+            }
+
+        })
+        console.log([requestBody.id, requestBody.actionId, requestBody.actorId, requestBody.targetId])
+        return NextResponse.json(x)
+    }
+    catch (error) {
+        console.log(error)
+        return NextResponse.json({}, { status: 400 })
+    }
+
 }

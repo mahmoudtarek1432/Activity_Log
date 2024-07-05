@@ -30,13 +30,14 @@ export default function LoggerTablerRowDataDetails({ loggerInfoDetails, onClickA
           >
           </DetailsSegment>
           <DetailsSegment
-            title="Action"
+            title="Date"
             fields={[
               { key: 'Date', value: loggerInfoDetails.date },
 
             ]}
           >
           </DetailsSegment>
+
           <div className="segment ">
             <div className="title uppercase text-fontGray font-medium">
               MetaData
@@ -45,14 +46,14 @@ export default function LoggerTablerRowDataDetails({ loggerInfoDetails, onClickA
               <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[250px]"></div>
             </div>
           </div>
-          <div className="segment ">
-            <div className="title uppercase text-fontGray font-medium">
-              Target
-            </div>
-            <div className="Attibute-grid grid segment-grid gap-y-2.5 mt-3.5 overflow-hidden">
-              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[250px]"></div>
-            </div>
-          </div>
+          <DetailsSegment
+            title="Target"
+            fields={[
+              { key: 'Name', value: loggerInfoDetails.targetData.name },
+              { key: 'ID', value: loggerInfoDetails.targetData.id },
+            ]}
+          >
+          </DetailsSegment>
         </div>
       </td>
     </>

@@ -7,10 +7,10 @@ import useEventStore from "@/Client/hooks/eventState";
 
 
 
-export default function LoggerTableRowData({ actionData, actorData, date, id }: LoggerInfoDetails) {
+export default function LoggerTableRowData({ actionData, actorData, targetData, date, id }: LoggerInfoDetails) {
 
     const eventStore = useEventStore();
-    const [arrowClass, setArrowClass] = useState<string>("transition-all duration-150");
+    const toggledArrow = "transition-all duration-150";
 
     function toggleDetails() {
         if (eventStore.toggledEventId == id)
@@ -30,7 +30,7 @@ export default function LoggerTableRowData({ actionData, actorData, date, id }: 
                 <td className="h-14  overflow-x-hidden text-ellipsis">{date}</td>
                 <td>
                     <Image
-                        className={"transition-all duration-200 " + arrowClass}
+                        className={"transition-all duration-200 " + eventStore.toggledEventId == id ? toggledArrow : ""}
                         src="/right-arrow.png"
                         width={13}
                         height={13}
@@ -45,6 +45,7 @@ export default function LoggerTableRowData({ actionData, actorData, date, id }: 
                             date: date,
                             actionData: actionData,
                             actorData: actorData,
+                            targetData: targetData,
                             id: id
                         }}
                         onClickAction={toggleDetails}>
