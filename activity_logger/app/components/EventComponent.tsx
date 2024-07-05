@@ -1,18 +1,20 @@
 'use client'
 import useEventStore from "@/Client/hooks/eventState";
-import SearchBar from "./SearchBar";
+import SearchBar from "./UtilBar";
 import LoggerTableRowData from "./LoggerTableRowData";
 import SkeletonRow from "./SkeletonRow";
 import LoadBar from "./LoadBar";
 import { useEffect } from "react";
 import { GetEvents } from "@/Client/Actions/EventActions";
+import { pageSize } from "../globals";
+import UtilBar from "./UtilBar";
 
 export default function EventComponent() {
 
     const eventStore = useEventStore();
 
     useEffect(() => {
-        GetEvents(eventStore.page + 1, 1, null, { action_id: null, actor_id: null, target_id: null, name: null }).
+        GetEvents(eventStore.page + 1, pageSize, null, { action_id: null, actor_id: null, target_id: null, name: null }).
             then(e => {
                 eventStore.updateList(e)
                 eventStore.incrementPage()
@@ -25,9 +27,7 @@ export default function EventComponent() {
         <>
             <div className="h-screen w-screen ">
                 <div className="container w-full rounded-xl shadow">
-                    <SearchBar>
-
-                    </SearchBar>
+                    <UtilBar></UtilBar>
                     <section className="table__body h-[600px] ">
                         <table className=" table-fixed w-full ">
                             <thead className="bg-neutral-100">
@@ -39,7 +39,7 @@ export default function EventComponent() {
                                 </tr>
                             </thead>
                             <tbody className="text-sm text-DarkGray">
-                                {eventStore.eventList.length > 0 && eventStore.eventList.map(e =>
+                                {eventStore.eventList.length > 0 ? eventStore.eventList.map(e =>
                                 (
 
                                     <LoggerTableRowData key={e.id}
@@ -49,11 +49,20 @@ export default function EventComponent() {
                                         date={e.date} >
                                     </LoggerTableRowData>
                                 )
+                                ) : (
+                                    <>
+                                        <SkeletonRow></SkeletonRow>
+                                        <SkeletonRow></SkeletonRow>
+                                        <SkeletonRow></SkeletonRow>
+                                        <SkeletonRow></SkeletonRow>
+                                        <SkeletonRow></SkeletonRow>
+                                        <SkeletonRow></SkeletonRow>
+                                        <SkeletonRow></SkeletonRow>
+                                    </>
                                 )}
 
 
-                                {/* skeleton*/}
-                                <SkeletonRow></SkeletonRow>
+
                             </tbody>
                         </table>
                     </section>

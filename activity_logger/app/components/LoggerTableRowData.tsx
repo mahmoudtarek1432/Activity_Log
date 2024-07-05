@@ -22,12 +22,12 @@ export default function LoggerTableRowData({ actionData, actorData, date, id }: 
     return (
         <>
             <tr className="hover:bg-hoverGray cursor-pointer" onClick={toggleDetails}>
-                <td className="h-14">
+                <td className="h-14 flex items-center">
                     <span className=" icon inline-block h-6 w-6 gradient-profile text-xs font-bold align-middle leading-6 text-center rounded-full text-white">{actorData.email[0].toUpperCase()}</span>
-                    <span className="text inline-block pl-2  leading-6">{actorData.email}</span>
+                    <span className="text inline-block pl-2 leading-6 w-full overflow-x-hidden text-ellipsis">{actorData.email}</span>
                 </td>
-                <td className="h-14">{actionData.name}</td>
-                <td className="h-14">{date}</td>
+                <td className="h-14  overflow-x-hidden text-ellipsis">{actionData.name}</td>
+                <td className="h-14  overflow-x-hidden text-ellipsis">{date}</td>
                 <td>
                     <Image
                         className={"transition-all duration-200 " + arrowClass}
@@ -41,10 +41,13 @@ export default function LoggerTableRowData({ actionData, actorData, date, id }: 
             {eventStore.toggledEventId == id &&
                 (<tr>
                     <LoggerTablerRowDataDetails
-                        id={id}
-                        actionData={actionData}
-                        actorData={actorData}
-                        date={date}>
+                        loggerInfoDetails={{
+                            date: date,
+                            actionData: actionData,
+                            actorData: actorData,
+                            id: id
+                        }}
+                        onClickAction={toggleDetails}>
                     </LoggerTablerRowDataDetails>
                 </tr>)
             }

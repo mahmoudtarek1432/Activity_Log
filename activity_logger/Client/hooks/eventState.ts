@@ -2,9 +2,11 @@ import { LoggerInfoDetails } from '@/type/LoggerInfoDetails'
 import { create } from 'zustand'
 
 type action = {
+  refreshList(events: LoggerInfoDetails[]): void
   updateList(events: LoggerInfoDetails[]): void,
   toggle(eventId: string): void
   incrementPage(): void
+  setPage(index: number): void
 }
 
 type state = {
@@ -17,6 +19,12 @@ const useEventStore = create<state & action>((set) => ({
   eventList: [],
   page: 0,
   toggledEventId: "",
+  refreshList(events: LoggerInfoDetails[]) {
+    set((state) => ({
+      ...state,
+      eventList: events
+    }))
+  },
   updateList(events) {
     set((state) => ({
       ...state,
@@ -28,6 +36,13 @@ const useEventStore = create<state & action>((set) => ({
     set((state) => ({
       ...state,
       page: this.page + 1
+    }))
+
+  },
+  setPage(index: number) {
+    set((state) => ({
+      ...state,
+      page: index
     }))
 
   },
