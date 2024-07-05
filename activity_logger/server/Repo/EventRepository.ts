@@ -1,5 +1,5 @@
-import mapEventIntoLoggerDetails from "@/Mapping/EventMap";
-import prisma from "../lib/db";
+import prisma from "@/lib/db";
+import mapEventIntoLoggerDetails from "../Mapping/EventMap";
 
 export class EventRepository {
 

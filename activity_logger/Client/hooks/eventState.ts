@@ -1,4 +1,4 @@
-import { LoggerInfoDetails } from '@/type/LoggerInfoDetails'
+import { LoggerInfoDetails } from '@/server/type/LoggerInfoDetails'
 import { create } from 'zustand'
 
 type action = {

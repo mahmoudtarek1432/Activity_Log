@@ -1,4 +1,4 @@
-import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
+import { LoggerInfoDetails } from "@/server/type/LoggerInfoDetails";
 import { Action, Event, User } from "@prisma/client";
 
 export default function mapEventIntoLoggerDetails(EventAction: Action, eventData: Event, actorData: User, targetData: User, creationDate: Date): LoggerInfoDetails {

@@ -1,5 +1,5 @@
 import { baseUrl } from "@/app/globals";
-import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
+import { LoggerInfoDetails } from "@/server/type/LoggerInfoDetails";
 import axios from "axios";
 import useSWR from "swr";
 

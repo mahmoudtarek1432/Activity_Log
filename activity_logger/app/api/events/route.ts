@@ -1,10 +1,7 @@
-import mapEventIntoLoggerDetails from "@/Mapping/EventMap";
-import prisma from "@/server/lib/db";
-import { EventRepository } from "@/server/repository/EventRepository";
-import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
-import { Event } from "@prisma/client";
+
+import { EventRepository } from "@/server/Repo/EventRepository";
 import { NextRequest, NextResponse } from "next/server";
-import { json } from "stream/consumers";
+
 
 export async function GET(request: NextRequest, response: NextResponse) {
     var page = Number.parseInt(request.nextUrl.searchParams.get("page")!);
