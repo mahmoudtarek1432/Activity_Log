@@ -30,7 +30,7 @@ export default function EventComponent() {
             <div className="h-screen w-screen ">
                 <div className="container w-full rounded-xl shadow">
                     <UtilBar></UtilBar>
-                    <section className="table__body h-[600px] ">
+                    <section className="table__body h-[500px] ">
                         <table className=" table-fixed w-full ">
                             <thead className="bg-neutral-100">
                                 <tr className="">
