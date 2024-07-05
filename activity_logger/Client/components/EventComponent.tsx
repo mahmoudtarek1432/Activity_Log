@@ -6,7 +6,7 @@ import SkeletonRow from "./SkeletonRow";
 import LoadBar from "./LoadBar";
 import { useEffect } from "react";
 import { GetEvents, GetEventsSWR } from "@/Client/Actions/EventActions";
-import { pageSize } from "../globals";
+import { pageSize } from "../../app/globals";
 import UtilBar from "./UtilBar";
 
 export default function EventComponent() {
@@ -34,9 +34,9 @@ export default function EventComponent() {
                         <table className=" table-fixed w-full ">
                             <thead className="bg-neutral-100">
                                 <tr className="">
-                                    <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">Actor</th>
-                                    <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">Action</th>
-                                    <th className="text-left font-semiBold text-sm py-4 text-stone-500 bg-neutral-100">Date</th>
+                                    <th className="text-left font-semiBold text-sm pbottom-4 text-stone-500 bg-neutral-100">Actor</th>
+                                    <th className="text-left font-semiBold text-sm pbottom-4 text-stone-500 bg-neutral-100">Action</th>
+                                    <th className="text-left font-semiBold text-sm pbottom-4 text-stone-500 bg-neutral-100">Date</th>
                                     <th className="w-6 bg-neutral-100"></th>
                                 </tr>
                             </thead>

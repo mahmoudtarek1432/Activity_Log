@@ -1,5 +1,6 @@
 import mapEventIntoLoggerDetails from "@/Mapping/EventMap";
-import prisma from "@/lib/db";
+import prisma from "@/server/lib/db";
+import { EventRepository } from "@/server/repository/EventRepository";
 import { LoggerInfoDetails } from "@/type/LoggerInfoDetails";
 import { Event } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
@@ -15,114 +16,24 @@ export async function GET(request: NextRequest, response: NextResponse) {
         target_id: request.nextUrl.searchParams.get("target_id"),
         name: request.nextUrl.searchParams.get("name"),
     } as EventFilter
+
     console.log("params: " + request.nextUrl.searchParams)
     console.log("filters:", filter)
-    var query = await prisma.event.findMany({
-        include: { actor: true, action: true, target: true },
-        take: size,
-        skip: (page - 1) * size,
-        where: {
-            AND: [
-                {
-                    OR: searchKey ? [{
-                        actor: {
-                            name: {
-                                contains: searchKey
-                            }
-                        }
-                    },
-                    {
-                        action: {
-                            name: {
-                                contains: searchKey
-                            }
-                        }
-                    }] : [{}],
-                },
-                {
-                    AND: [
-                        {
-                            OR: [
-                                (filter.action_id) ?
-                                    {
-                                        action: {
-                                            id:
-                                            {
-                                                equals: filter.action_id!,
 
-                                            }
-                                        }
-                                    } : {}
-                            ]
-                        },
-                        {
-                            OR: [
-                                (filter.actor_id) ?
-                                    {
-                                        actor: {
-                                            id:
-                                            {
-                                                equals: filter.actor_id!,
+    var eventRepository = new EventRepository();
+    var events = await eventRepository.getEventsQuery(size, page, searchKey, filter)
+    console.log("event", events)
 
-                                            }
-                                        }
-                                    } : {}
-                            ]
-                        },
-                        {
-                            OR: [
-                                (filter.target_id) ?
-                                    {
-                                        target: {
-                                            id:
-                                            {
-                                                equals: filter.target_id!,
-
-                                            }
-                                        }
-                                    } : {}
-                            ]
-                        },
-                        {
-                            OR: [
-                                (filter.name) ?
-                                    {
-                                        id: {
-                                            equals: filter.name!,
-                                        }
-                                    } : {}
-                            ]
-                        }
-                    ]
-                }
-            ]
-
-
-        }
-    });
-
-    console.log("query", JSON.stringify(query))
-    var mapping = query.map(e => mapEventIntoLoggerDetails(e.action, e, e.actor, e.target, e.createdOn))
-    console.log("map", mapping)
-    return NextResponse.json(mapping)
+    return NextResponse.json(events)
 }
 
 export async function POST(request: NextRequest, response: NextResponse) {
     try {
         var requestBody = await request.json();
-        console.log([requestBody.id, requestBody.actionId, requestBody.actorId, requestBody.targetId])
 
-        var x = await prisma.event.create({
-            data: {
-                id: requestBody.id,
-                action: { connect: { id: requestBody.actionId } },
-                actor: { connect: { id: requestBody.actorId } },
-                target: { connect: { id: requestBody.targetId } },
-            }
-
-        })
-        console.log([requestBody.id, requestBody.actionId, requestBody.actorId, requestBody.targetId])
-        return NextResponse.json(x)
+        var eventRepository = new EventRepository();
+        var createdEvent = await eventRepository.createEvent(requestBody.id, requestBody.actorId, requestBody.targetId, requestBody.actionId)
+        return NextResponse.json(createdEvent)
     }
     catch (error) {
         console.log(error)

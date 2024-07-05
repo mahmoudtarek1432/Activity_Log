@@ -1,7 +1,7 @@
 import { GetEvents } from "@/Client/Actions/EventActions"
 import useEventStore from "@/Client/hooks/eventState"
 import { useEffect, useState } from "react"
-import { pageSize } from "../globals"
+import { pageSize } from "../../app/globals"
 import useSearchStore from "@/Client/hooks/searchState"
 
 export default function SearchBar() {
@@ -26,7 +26,6 @@ export default function SearchBar() {
     const searchList = () => {
         console.log(searchDirty)
         if (searchDirty == true) {
-            console.log("inter", passedInterval)
             setPassedInterval(passedInterval + intervalCount)
 
             if (passedInterval >= searchTimer) {
@@ -40,7 +39,6 @@ export default function SearchBar() {
                 GetEvents(eventStore.page, pageSize, searchStore.searchKey, { action_id: null, actor_id: null, target_id: null, name: null }).
                     then(res => {
 
-                        console.log(res)
                         eventStore.refreshList(res);
                         eventStore.setIsLoading(false);
                         if (res.length >= pageSize)

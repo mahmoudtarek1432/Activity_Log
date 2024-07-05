@@ -6,7 +6,7 @@ export default function UtilBar() {
 
 
     return (
-        <section className="Search-Bar w-full bg-neutral-100 px-4 pt-4 rounded-t-xl">
+        <section className="Search-Bar w-full bg-neutral-100 px-4 py-4 rounded-t-xl">
             <div className="wrapper w-full border border-lightGray rounded-lg pl-4 h-11 flex">
                 <SearchBar></SearchBar>
                 <span className="flex-split"></span>

@@ -1,5 +1,5 @@
 
-import EventComponent from "./components/EventComponent";
+import EventComponent from "../Client/components/EventComponent";
 
 export default async function Home() {
 

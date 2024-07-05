@@ -1,6 +1,6 @@
 import { GetEvents } from "@/Client/Actions/EventActions"
 import useEventStore from "@/Client/hooks/eventState"
-import { pageSize } from "../globals";
+import { pageSize } from "../../app/globals";
 import useSearchStore from "@/Client/hooks/searchState";
 
 export default function LoadBar() {
