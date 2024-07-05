@@ -1,3 +1,5 @@
+import { env } from "process"
+
 export const pageSize = 8
 
-export const baseUrl = "http://localhost:3000"
+export const baseUrl = env["BASEURL"]
