@@ -23,9 +23,9 @@ export default function LoggerTablerRowDataDetails({ loggerInfoDetails, onClickA
           <DetailsSegment
             title="Action"
             fields={[
-              { key: 'name', value: loggerInfoDetails.actionData.name },
-              { key: 'object', value: loggerInfoDetails.actionData.object },
-              { key: 'id', value: loggerInfoDetails.actionData.id }
+              { key: 'Name', value: loggerInfoDetails.actionData.name },
+              { key: 'Object', value: loggerInfoDetails.actionData.object },
+              { key: 'ID', value: loggerInfoDetails.actionData.id }
             ]}
           >
           </DetailsSegment>
