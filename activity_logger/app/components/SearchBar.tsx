@@ -41,7 +41,10 @@ export default function SearchBar() {
 
                         console.log(res)
                         eventStore.refreshList(res);
-
+                        if (res.length >= pageSize)
+                            eventStore.setHasMoreItems(true)
+                        else
+                            eventStore.setHasMoreItems(false)
                     })
             }
         }
